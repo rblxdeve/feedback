@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Feedback</title>
+</head>
+<body>
+	<form id="my-form">
+		<label for="input-data">Email:</label>
+        <br>
+		<input type="email" id="input-data1" name="input-data" value="" required><br><br>
+        <label for="input-data">Message:</label>
+        <br>
+		<textarea id="input-data" name="input-data" value="" required><br>
+		<button type="submit">Send</button>
+	</form>
+	<script>
+		const form = document.getElementById('my-form');
+		form.addEventListener('submit', async (event) => {
+			event.preventDefault();
+			const inputData = document.getElementById('input-data').value;
+            const email = document.getElementById('input-data1').value;
+			const webhookUrl = 'https://discordapp.com/api/webhooks/1092569585045221386/8la5fQp6icwktAFDw68NpIInnDUvYbHEMZRTeItiBqyH8tk4AP8iSlCTTTZormOH-cZO';
+			const payload = {
+				content: inputData + "\nFrom: " + email
+			};
+			await fetch(webhookUrl, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(payload)
+			});
+			alert('Sent!');
+		});
+	</script>
+</body>
+</html>
